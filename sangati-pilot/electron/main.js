@@ -211,9 +211,12 @@ function pipeToLog(proc, label) {
 }
 
 function spawnCmd(command, args, options) {
-  // On Windows, .cmd/.bat scripts must be spawned with shell: true
+  // On Windows, .cmd/.bat scripts must be spawned with shell: true.
+  // When shell:true, cmd.exe receives the command as a raw string and splits
+  // on spaces — so any path containing spaces must be double-quoted.
   const isWin = process.platform === 'win32';
-  return spawn(command, args, { ...options, shell: isWin });
+  const cmd = (isWin && command.includes(' ')) ? `"${command}"` : command;
+  return spawn(cmd, args, { ...options, shell: isWin });
 }
 
 function spawnApi() {

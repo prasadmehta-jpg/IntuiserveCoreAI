@@ -15,7 +15,7 @@
     "build": "pnpm --recursive build",
     "build:web": "pnpm --filter @sangati/web build",
     "electron:dev": "electron .",
-    "electron:build": "pnpm build:web && electron-builder --win --x64",
+    "electron:build": "pnpm build:web && node scripts/prepare-standalone.cjs && electron-builder --win --x64",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
   },
   "pnpm": {
@@ -72,6 +72,12 @@
     ],
     "asar": false,
     "npmRebuild": false,
+    "extraResources": [
+      {
+        "from": "apps/web/.next/standalone/node_modules",
+        "to": "app/apps/web/.next/standalone/node_modules"
+      }
+    ],
     "win": {
       "target": [
         {
