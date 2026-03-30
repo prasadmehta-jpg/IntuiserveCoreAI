@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "paths": {
+      "@sangati/shared": ["../../packages/shared/src/index.ts"],
+      "@sangati/db": ["../../packages/db/src/index.ts"]
+    }
+  }
+}
