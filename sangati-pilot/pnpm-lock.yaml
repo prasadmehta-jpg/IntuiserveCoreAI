@@ -7,19 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@types/better-sqlite3':
-        specifier: ^7.6.13
-        version: 7.6.13
-      '@types/ws':
-        specifier: ^8.18.1
-        version: 8.18.1
-      better-sqlite3:
-        specifier: ^9.6.0
-        version: 9.6.0
-      ws:
-        specifier: ^8.20.0
-        version: 8.20.0
     devDependencies:
       '@types/node':
         specifier: ^20.11.0

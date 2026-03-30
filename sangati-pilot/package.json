@@ -71,6 +71,7 @@
       "!**/.git/**"
     ],
     "asar": false,
+    "npmRebuild": false,
     "win": {
       "target": [
         {
@@ -95,11 +96,5 @@
       "warningsAsErrors": false,
       "include": "electron/installer.nsh"
     }
-  },
-  "dependencies": {
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/ws": "^8.18.1",
-    "better-sqlite3": "^9.6.0",
-    "ws": "^8.20.0"
   }
 }

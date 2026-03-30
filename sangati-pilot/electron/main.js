@@ -267,11 +267,11 @@ function spawnWeb() {
     const publicSrc  = path.join(webDir, 'public');
     const publicDest = path.join(webDir, '.next', 'standalone', 'apps', 'web', 'public');
     try {
-      if (fs.existsSync(staticSrc) && !fs.existsSync(staticDest)) {
-        fs.cpSync(staticSrc, staticDest, { recursive: true });
+      if (fs.existsSync(staticSrc)) {
+        fs.cpSync(staticSrc, staticDest, { recursive: true, force: true });
       }
-      if (fs.existsSync(publicSrc) && !fs.existsSync(publicDest)) {
-        fs.cpSync(publicSrc, publicDest, { recursive: true });
+      if (fs.existsSync(publicSrc)) {
+        fs.cpSync(publicSrc, publicDest, { recursive: true, force: true });
       }
     } catch (e) { log(`Static copy warning: ${e.message}`); }
   }
@@ -292,8 +292,17 @@ function spawnWeb() {
       stdio: ['ignore', 'pipe', 'pipe'],
       windowsHide: true,
     });
+  } else if (!IS_DEV) {
+    // Packaged exe: standalone build is required — show a clear error rather than
+    // attempting next dev, which would fail silently and produce a localhost error.
+    const missing = standaloneServer;
+    log(`ERROR: Standalone web build not found at ${missing}`);
+    throw new Error(
+      'Web interface build is missing. Please reinstall SANGATI or contact support.\n' +
+      `(Expected: ${missing})`
+    );
   } else {
-    // Fallback to next dev
+    // Development fallback: run next dev so engineers can iterate without a full build
     log(`Spawning Web (next dev): npx next dev -p ${PORTS.web}`);
     webProcess = spawnCmd('npx', ['next', 'dev', '-p', String(PORTS.web)], {
       cwd: webDir,
