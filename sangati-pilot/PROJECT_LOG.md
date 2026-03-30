@@ -23,6 +23,12 @@
 
 ### March 2026
 
+**[2026-03-30] — Ollama install attempt**
+- Tool: Claude Code
+- Action: Attempted Ollama install for local LLM inference. Install did not complete — UAC popup was not approved in time.
+- Files changed: None
+- Notes: Retry with `winget install Ollama.Ollama` and approve the UAC popup when it appears. Ollama is needed for offline phi3:mini inference (Decision #4).
+
 **[2026-03-30] — Camera reverse engineering + DPDPA compliance**
 - Tool: Claude Code
 - Action: Built `packages/camera/` discovery engine (ONVIF, SADP, RTSP scan, manufacturer fingerprinting). Expanded DB schema (cameras, nvrs, occupancy_readings, venue_config). Added DPDPA compliance routes + ConsentScreen. Updated `/cameras` page with dark-theme UI and stream health metrics. `docs/nvr-discovery.md` added as canonical reference.
