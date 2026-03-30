@@ -1,0 +1,19 @@
+{
+  "name": "@sangati/core",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sangati/shared": "workspace:*",
+    "@sangati/db": "workspace:*",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.7",
+    "vitest": "^1.2.0"
+  }
+}
