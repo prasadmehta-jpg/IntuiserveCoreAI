@@ -1,0 +1,87 @@
+{
+  "name": "sangati-pilot",
+  "version": "2.0.0",
+  "description": "SANGATI — AI Restaurant Operations Platform",
+  "author": "Prasad Matrix Inc",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently --names \"api,web\" --prefix-colors \"cyan,magenta\" \"pnpm --filter @sangati/api dev\" \"pnpm --filter @sangati/web dev\"",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "sim": "tsx scripts/sim.ts",
+    "golden": "tsx scripts/golden-run.ts",
+    "test": "vitest run",
+    "build": "pnpm --recursive build",
+    "build:web": "pnpm --filter @sangati/web build",
+    "electron:dev": "electron .",
+    "electron:build": "pnpm build:web && electron-builder --win --x64",
+    "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "@next/swc", "sharp", "electron"]
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.1",
+    "electron": "^32.3.3",
+    "electron-builder": "^25.1.8",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "uuid": "^9.0.0",
+    "@types/uuid": "^9.0.7",
+    "vitest": "^1.2.0"
+  },
+  "build": {
+    "appId": "tech.sangati.pilot",
+    "productName": "SANGATI",
+    "copyright": "Prasad Matrix Inc",
+    "directories": {
+      "output": "release",
+      "buildResources": "resources"
+    },
+    "files": [
+      "electron/**/*",
+      "apps/api/**/*",
+      "apps/web/.next/**/*",
+      "apps/web/public/**/*",
+      "apps/web/pages/**/*",
+      "apps/web/package.json",
+      "apps/web/next.config.js",
+      "packages/**/*",
+      "agents/vision/**/*",
+      "integrations/**/*",
+      "scripts/migrate.ts",
+      "scripts/seed.ts",
+      "node_modules/**/*",
+      "pnpm-workspace.yaml",
+      "package.json",
+      "tsconfig.base.json",
+      "!**/*.test.ts",
+      "!**/*.spec.ts",
+      "!**/node_modules/.cache/**",
+      "!**/.next/cache/**",
+      "!**/data/*.db",
+      "!**/.git/**"
+    ],
+    "asar": false,
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "resources/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SANGATI",
+      "runAfterFinish": true,
+      "warningsAsErrors": false,
+      "include": "electron/installer.nsh"
+    }
+  }
+}
