@@ -19,10 +19,16 @@
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "@next/swc", "sharp", "electron"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@next/swc",
+      "sharp",
+      "electron"
+    ]
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "@types/uuid": "^9.0.7",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.1",
     "electron": "^32.3.3",
@@ -30,7 +36,6 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "uuid": "^9.0.0",
-    "@types/uuid": "^9.0.7",
     "vitest": "^1.2.0"
   },
   "build": {
@@ -67,7 +72,14 @@
     ],
     "asar": false,
     "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
       "icon": "resources/icon.ico",
       "requestedExecutionLevel": "asInvoker"
     },
@@ -83,5 +95,11 @@
       "warningsAsErrors": false,
       "include": "electron/installer.nsh"
     }
+  },
+  "dependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/ws": "^8.18.1",
+    "better-sqlite3": "^9.6.0",
+    "ws": "^8.20.0"
   }
 }
