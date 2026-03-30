@@ -240,7 +240,8 @@ async function scanSubnetForRtsp(subnet: string, timeoutMs = CONNECT_TIMEOUT_MS)
 async function detectManufacturer(ip: string): Promise<CameraManufacturer | null> {
   return new Promise((resolve) => {
     const req = http.get(`http://${ip}/`, { timeout: 1500 }, (res) => {
-      const server = (res.headers['server'] ?? '').toLowerCase();
+      const serverHeader = res.headers['server'];
+      const server = (Array.isArray(serverHeader) ? serverHeader.join(' ') : serverHeader ?? '').toLowerCase();
       const body: string[] = [];
       res.on('data', (d: Buffer) => body.push(d.toString()));
       res.on('end', () => {
